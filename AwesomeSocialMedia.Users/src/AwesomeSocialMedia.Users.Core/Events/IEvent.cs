@@ -1,6 +1,5 @@
-﻿namespace AwesomeSocialMedia.Users.Core.Events
+﻿namespace AwesomeSocialMedia.Users.Core.Events;
+
+public interface IEvent
 {
-    public interface IEvent
-    {
-    }
 }

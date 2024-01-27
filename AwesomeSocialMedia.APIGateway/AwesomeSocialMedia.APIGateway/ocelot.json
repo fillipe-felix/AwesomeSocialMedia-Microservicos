@@ -1,0 +1,47 @@
+﻿{
+  "Routes": [
+    {
+      // luisdeveapigateway/posts/api/posts
+      // microservicoposts.com/api/posts
+      "UpstreamPathTemplate": "/posts/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5144
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT"
+      ]
+    },
+    {
+      // luisdeveapigateway/newsfeed/api/users/12312/newsfeed
+      // microserviconewsfeed.com/api/users/12312/newsfeed
+      "UpstreamPathTemplate": "/newsfeed/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5224
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+          
+        ],
+        "EnableRateLimiting": true,
+        "Period": "10s", // tempo
+        "PeriodTimespan": 10, // tempo que vai ficar sem acesso
+        "Limit": 1 // requisições permitidas no tempo
+      }
+    }
+  ]
+}

@@ -1,12 +1,9 @@
-﻿using System;
-using AwesomeSocialMedia.Newsfeed.API.Core.Entities;
+﻿using AwesomeSocialMedia.Newsfeed.API.Core.Entities;
 
-namespace AwesomeSocialMedia.Newsfeed.API.Core.Repositories
+namespace AwesomeSocialMedia.Newsfeed.API.Core.Repositories;
+
+public interface IUserNewsfeedRepository
 {
-	public interface IUserNewsfeedRepository
-	{
-		Task AddPost(User user, Post post);
-		Task<UserNewsfeed?> GetByUserId(Guid userId);
-	}
+    Task AddPost(User user, Post post);
+    Task<UserNewsfeed?> GetByUserId(Guid userId);
 }
-

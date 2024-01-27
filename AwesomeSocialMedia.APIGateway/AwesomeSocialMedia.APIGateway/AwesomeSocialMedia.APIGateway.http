@@ -1,0 +1,6 @@
+@AwesomeSocialMedia.APIGateway_HostAddress = http://localhost:5143
+
+GET {{AwesomeSocialMedia.APIGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

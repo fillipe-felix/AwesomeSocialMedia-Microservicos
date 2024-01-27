@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AwesomeSocialMedia.Newsfeed.API.Core.Repositories;
+﻿using AwesomeSocialMedia.Newsfeed.API.Core.Repositories;
+
 using Microsoft.AspNetCore.Mvc;
 
-namespace AwesomeSocialMedia.Newsfeed.API.Controllers
+namespace AwesomeSocialMedia.Newsfeed.API.Controllers;
+
+[Route("api/newsfeed")]
+public class NewsfeedsController : Controller
 {
-    [Route("api/newsfeed")]
-    public class NewsfeedsController : Controller
+    private readonly IUserNewsfeedRepository _repository;
+
+    public NewsfeedsController(IUserNewsfeedRepository repository)
     {
-        private readonly IUserNewsfeedRepository _repository;
+        _repository = repository;
+    }
 
-        public NewsfeedsController(IUserNewsfeedRepository repository)
+    // Não é para pegar a timeline, e sim o feed de posts de um usuário
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetUserNewsfeed(Guid userId)
+    {
+        var newsfeed = await _repository.GetByUserId(userId);
+
+        if (newsfeed is null)
         {
-            _repository = repository;
+            return NotFound();
         }
 
-        // Não é para pegar a timeline, e sim o feed de posts de um usuário
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetUserNewsfeed(Guid userId)
-        {
-            var newsfeed = await _repository.GetByUserId(userId);
-
-            if (newsfeed is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(newsfeed);
-        }
+        return Ok(newsfeed);
     }
 }
-
