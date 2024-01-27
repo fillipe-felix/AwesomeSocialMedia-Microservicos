@@ -1,50 +1,58 @@
-﻿using System;
-using AwesomeSocialMedia.Posts.Application.InputModels;
+﻿using AwesomeSocialMedia.Posts.Application.InputModels;
 using AwesomeSocialMedia.Posts.Application.ViewModels;
 using AwesomeSocialMedia.Posts.Core.Repositories;
 using AwesomeSocialMedia.Posts.Infrastructure.EventBus;
+using AwesomeSocialMedia.Posts.Infrastructure.Integration.Services;
 
-namespace AwesomeSocialMedia.Posts.Application.Services
+namespace AwesomeSocialMedia.Posts.Application.Services;
+
+public class PostService : IPostService
 {
-	public class PostService : IPostService
-	{
-		private readonly IPostRepository _repository;
-		private readonly IEventBus _bus;
-        public PostService(IPostRepository repository, IEventBus bus)
-		{
-			_repository = repository;
-			_bus = bus;
-        }
+    private readonly IPostRepository _repository;
+    private readonly IEventBus _bus;
+    private readonly IUserIntegrationService _userService;
 
-		public async Task<BaseResult<Guid>> Create(CreatePostInputModel model)
-		{
-			var post = model.ToEntity();
+    public PostService(IPostRepository repository, IEventBus bus, IUserIntegrationService userService)
+    {
+        _repository = repository;
+        _bus = bus;
+        _userService = userService;
+    }
 
-			await _repository.AddAsync(post);
+    public async Task<BaseResult<Guid>> Create(CreatePostInputModel model)
+    {
+        var userResult = await _userService.GetById(model.UserId);
 
-			foreach (var @event in post.Events)
-			{
-				_bus.Publish(@event);
-			}
-
-			return new BaseResult<Guid>(post.Id);
-		}
-
-        public async Task<BaseResult> Delete(Guid id)
+        if (userResult is null || !userResult.Success)
         {
-			await _repository.DeleteAsync(id);
-
-			return new BaseResult();
+            return new BaseResult<Guid>(Guid.Empty, false, userResult.Message);
         }
 
-        public async Task<BaseResult<List<PostItemViewModel>>> GetAll(Guid userId)
-		{
-			var posts = await _repository.GetAllAsync(userId);
+        var post = model.ToEntity();
 
-			var viewModels = posts.Select(p => new PostItemViewModel(p)).ToList();
+        await _repository.AddAsync(post);
 
-			return new BaseResult<List<PostItemViewModel>>(viewModels);
-		}
-	}
+        foreach (var @event in post.Events)
+        {
+            _bus.Publish(@event);
+        }
+
+        return new BaseResult<Guid>(post.Id);
+    }
+
+    public async Task<BaseResult> Delete(Guid id)
+    {
+        await _repository.DeleteAsync(id);
+
+        return new BaseResult();
+    }
+
+    public async Task<BaseResult<List<PostItemViewModel>>> GetAll(Guid userId)
+    {
+        var posts = await _repository.GetAllAsync(userId);
+
+        var viewModels = posts.Select(p => new PostItemViewModel(p)).ToList();
+
+        return new BaseResult<List<PostItemViewModel>>(viewModels);
+    }
 }
-

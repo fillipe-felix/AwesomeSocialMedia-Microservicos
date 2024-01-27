@@ -1,25 +1,23 @@
-﻿using System;
-using AwesomeSocialMedia.Posts.Application.Services;
+﻿using AwesomeSocialMedia.Posts.Application.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AwesomeSocialMedia.Posts.Application
+namespace AwesomeSocialMedia.Posts.Application;
+
+public static class ApplicationModule
 {
-	public static class ApplicationModule
-	{
-		public static IServiceCollection AddApplication(this IServiceCollection services)
-		{
-			services
-				.AddServices();
+    public static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+        services
+            .AddServices();
 
-			return services;
-		}
+        return services;
+    }
 
-		private static IServiceCollection AddServices(this IServiceCollection services)
-		{
-			services.AddScoped<IPostService, PostService>();
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IPostService, PostService>();
 
-			return services;
-		}
-	}
+        return services;
+    }
 }
-

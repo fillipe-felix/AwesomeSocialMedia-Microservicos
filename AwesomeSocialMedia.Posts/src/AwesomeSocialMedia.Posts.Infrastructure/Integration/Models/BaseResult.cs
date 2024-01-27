@@ -1,4 +1,4 @@
-﻿namespace AwesomeSocialMedia.Posts.Application.ViewModels;
+﻿namespace AwesomeSocialMedia.Posts.Infrastructure.Integration.Models;
 
 public class BaseResult
 {
@@ -8,8 +8,8 @@ public class BaseResult
         Message = message;
     }
 
-    public bool Success { get; set; }
-    public string Message { get; set; }
+    public bool Success { get; private set; }
+    public string Message { get; private set; }
 }
 
 public class BaseResult<T> : BaseResult
@@ -19,5 +19,5 @@ public class BaseResult<T> : BaseResult
         Data = data;
     }
 
-    public T Data { get; set; }
+    public T Data { get; private set; }
 }

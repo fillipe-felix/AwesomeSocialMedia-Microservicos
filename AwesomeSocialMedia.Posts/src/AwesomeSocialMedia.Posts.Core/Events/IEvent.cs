@@ -1,8 +1,5 @@
-﻿using System;
-namespace AwesomeSocialMedia.Posts.Core.Events
-{
-	public interface IEvent
-	{
-	}
-}
+﻿namespace AwesomeSocialMedia.Posts.Core.Events;
 
+public interface IEvent
+{
+}
