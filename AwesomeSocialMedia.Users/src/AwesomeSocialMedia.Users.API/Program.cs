@@ -1,6 +1,8 @@
 using AwesomeSocialMedia.Users.Application;
 using AwesomeSocialMedia.Users.Infrastructure;
 
+using Prometheus;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +16,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 app.UseInfrastructure();
 

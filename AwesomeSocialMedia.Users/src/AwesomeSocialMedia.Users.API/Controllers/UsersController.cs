@@ -1,10 +1,13 @@
-﻿using AwesomeSocialMedia.Users.Application.Commands.SignUpUser;
+﻿
+using AwesomeSocialMedia.Users.Application.Commands.SignUpUser;
 using AwesomeSocialMedia.Users.Application.Commands.UpdateUser;
 using AwesomeSocialMedia.Users.Application.Queries.GetUserById;
 
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
+
+using Prometheus;
 
 namespace AwesomeSocialMedia.Users.API.Controllers;
 
@@ -13,6 +16,7 @@ namespace AwesomeSocialMedia.Users.API.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private static readonly Counter _userCreatedCounter = Metrics.CreateCounter("userscreated", "count users of created");
 
     public UsersController(IMediator mediator)
     {
@@ -33,6 +37,11 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Post(SignUpUserCommand command)
     {
         var result = await _mediator.Send(command);
+
+        if (result.Success)
+        {
+            _userCreatedCounter.Inc();
+        }
 
         return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
     }
