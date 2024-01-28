@@ -1,0 +1,29 @@
+﻿{
+  "Routes": [
+    {
+      // luisdeveapigateway/newsfeed/api/users/12312/newsfeed
+      // microserviconewsfeed.com/api/users/12312/newsfeed
+      "UpstreamPathTemplate": "/newsfeed/{everything}", //para o swagger fazer as request precisa deixar apenas {everything} no upstream, limitação da biblioteca do swagger do ocelot
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5224
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "10s", // tempo
+        "PeriodTimespan": 10, // tempo que vai ficar sem acesso
+        "Limit": 100 // requisições permitidas no tempo
+      }
+    }
+  ]
+}

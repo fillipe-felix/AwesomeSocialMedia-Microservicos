@@ -1,0 +1,22 @@
+﻿{
+  "Routes": [
+    {
+      // luisdeveapigateway/posts/api/posts
+      // microservicoposts.com/api/posts
+      "UpstreamPathTemplate": "/users/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5109
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT"
+      ]
+    }
+  ]
+}
