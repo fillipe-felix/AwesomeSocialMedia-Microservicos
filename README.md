@@ -25,6 +25,7 @@ docker run -d -p 8500:8500 -p 8600:8600/udp --name=consul consul:1.15.4 agent -s
 ```bash
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
 ```
+OU 
 
 ### 3. Executar as Aplicações via Docker Compose
 Dentro da raiz do projeto, execute o seguinte comando para iniciar todas as aplicações e as ferramentas de monitoramento (Prometheus e Grafana) usando o arquivo **docker-compose.yml**:
@@ -36,8 +37,8 @@ Este comando irá configurar e iniciar todos os serviços necessários para as a
 Após a execução destes passos, as aplicações Awesome Social Media devem estar funcionando corretamente.
 
 ### 4. Acesso ao Prometheus e Grafana
-* Prometheus: http://localhost:9090
-* Grafana: http://localhost:3000 (Credenciais padrão: admin/admin)
+* Prometheus: http://localhost:30090
+* Grafana: http://localhost:30091 (Credenciais padrão: admin/admin)
 
 No Grafana, configure um novo data source apontando para o Prometheus (http://prometheus:9090) e importe um dashboard para visualizar as métricas das aplicações Awesome Social Media.
 
