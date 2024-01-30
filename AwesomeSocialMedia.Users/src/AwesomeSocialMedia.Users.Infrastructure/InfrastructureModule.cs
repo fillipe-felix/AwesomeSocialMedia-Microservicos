@@ -1,4 +1,5 @@
 ﻿using AwesomeSocialMedia.Users.Core.Repositories;
+using AwesomeSocialMedia.Users.Infrastructure.EventBus;
 using AwesomeSocialMedia.Users.Infrastructure.Persistence;
 using AwesomeSocialMedia.Users.Infrastructure.Persistence.Repositories;
 
@@ -20,6 +21,7 @@ public static class InfrastructureModule
         var connectionString = configuration.GetConnectionString("AwesomeSocialMediaCs");
 
         services
+            .AddEventBus()
             .AddDb(connectionString)
             .AddRepositories()
             .AddConsul(configuration);
@@ -32,6 +34,13 @@ public static class InfrastructureModule
         builder.UseConsul();
 
         return builder;
+    }
+    
+    private static IServiceCollection AddEventBus(this IServiceCollection services)
+    {
+        services.AddScoped<IEventBus, RabbitMqService>();
+
+        return services;
     }
     
     private static IServiceCollection AddDb(this IServiceCollection services, string? connectionString)

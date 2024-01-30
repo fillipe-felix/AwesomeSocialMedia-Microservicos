@@ -16,7 +16,7 @@ public class User : AggregateRoot
 
         Status = UserStatus.Active;
 
-        Events.Add(new UserCreated(Email, DisplayName));
+        AddEvent(new UserCreated(Email, DisplayName));
     }
 
     public string FullName { get; private set; }
@@ -40,5 +40,7 @@ public class User : AggregateRoot
         Description = description;
         Location = location;
         Contact = contact;
+        
+        AddEvent(new UserUpdated(displayName));
     }
 }

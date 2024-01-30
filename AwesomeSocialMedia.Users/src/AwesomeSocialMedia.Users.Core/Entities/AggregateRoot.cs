@@ -10,4 +10,9 @@ public abstract class AggregateRoot : BaseEntity
     }
 
     public List<IEvent> Events { get; private set; }
+    
+    protected void AddEvent(IEvent @event)
+    {
+        Events.Add(@event);
+    }
 }
