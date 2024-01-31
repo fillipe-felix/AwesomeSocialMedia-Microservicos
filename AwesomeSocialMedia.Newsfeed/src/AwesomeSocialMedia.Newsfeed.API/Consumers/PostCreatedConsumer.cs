@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
-using AwesomeSocialMedia.Newsfeed.API.Core.Entities;
-using AwesomeSocialMedia.Newsfeed.API.Core.Repositories;
+using AwesomeSocialMedia.Newsfeed.Core.Core.Entities;
+using AwesomeSocialMedia.Newsfeed.Core.Core.Repositories;
 
 using Newtonsoft.Json;
 

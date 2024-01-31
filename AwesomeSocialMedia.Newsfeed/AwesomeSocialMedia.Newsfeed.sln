@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E16ACFCB-D92
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeSocialMedia.Newsfeed.API", "src\AwesomeSocialMedia.Newsfeed.API\AwesomeSocialMedia.Newsfeed.API.csproj", "{515D9935-E9ED-46C6-BEA5-22040166E41C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeSocialMedia.Newsfeed.Application", "src\AwesomeSocialMedia.Newsfeed.Application\AwesomeSocialMedia.Newsfeed.Application.csproj", "{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeSocialMedia.Newsfeed.Infrastructure", "src\AwesomeSocialMedia.Newsfeed.Infrastructure\AwesomeSocialMedia.Newsfeed.Infrastructure.csproj", "{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeSocialMedia.Newsfeed.Core", "src\AwesomeSocialMedia.Newsfeed.Core\AwesomeSocialMedia.Newsfeed.Core.csproj", "{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +23,18 @@ Global
 		{515D9935-E9ED-46C6-BEA5-22040166E41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{515D9935-E9ED-46C6-BEA5-22040166E41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{515D9935-E9ED-46C6-BEA5-22040166E41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{515D9935-E9ED-46C6-BEA5-22040166E41C} = {E16ACFCB-D92F-4A39-B3AA-8FA972A5007F}
+		{B54A1A75-8C4E-4CC2-828A-79C45FDCD5FF} = {E16ACFCB-D92F-4A39-B3AA-8FA972A5007F}
+		{86B2A6B9-DD30-45A2-BCD9-A0D9B5EF8B1D} = {E16ACFCB-D92F-4A39-B3AA-8FA972A5007F}
+		{E63F409E-5A35-4130-8E54-E7C7BDCB9DF4} = {E16ACFCB-D92F-4A39-B3AA-8FA972A5007F}
 	EndGlobalSection
 EndGlobal

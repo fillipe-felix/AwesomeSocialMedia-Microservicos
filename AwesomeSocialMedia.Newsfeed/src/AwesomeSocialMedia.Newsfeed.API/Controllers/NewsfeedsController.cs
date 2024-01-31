@@ -1,4 +1,5 @@
-﻿using AwesomeSocialMedia.Newsfeed.API.Core.Repositories;
+﻿using AwesomeSocialMedia.Newsfeed.Application.Services;
+using AwesomeSocialMedia.Newsfeed.Core.Core.Repositories;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,18 +8,19 @@ namespace AwesomeSocialMedia.Newsfeed.API.Controllers;
 [Route("api/newsfeed")]
 public class NewsfeedsController : Controller
 {
-    private readonly IUserNewsfeedRepository _repository;
+    private readonly IGetUserNewsFeedService _getUserNewsFeedService;
 
-    public NewsfeedsController(IUserNewsfeedRepository repository)
+    public NewsfeedsController(IGetUserNewsFeedService getUserNewsFeedService)
     {
-        _repository = repository;
+        _getUserNewsFeedService = getUserNewsFeedService;
     }
+
 
     // Não é para pegar a timeline, e sim o feed de posts de um usuário
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUserNewsfeed(Guid userId)
     {
-        var newsfeed = await _repository.GetByUserId(userId);
+        var newsfeed = await _getUserNewsFeedService.GetUserNewsFeed(userId);
 
         if (newsfeed is null)
         {

@@ -2,10 +2,12 @@
 
 public class UserUpdated : IEvent
 {
-    public UserUpdated(string displayName)
+    public UserUpdated(Guid id, string displayName)
     {
+        Id = id;
         DisplayName = displayName;
     }
 
+    public Guid Id { get; set; }
     public string DisplayName { get; set; }
 }

@@ -1,5 +1,9 @@
 ﻿using System.Text;
 
+using AwesomeSocialMedia.Newsfeed.Core.Core.Repositories;
+
+using Newtonsoft.Json;
+
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -7,13 +11,15 @@ namespace AwesomeSocialMedia.Newsfeed.API.Consumers;
 
 public class UserUpdatedConsumer : BackgroundService
 {
+    private readonly IServiceProvider _serviceProvider;
     private readonly IModel _channel;
     private const string Queue = "newsfeed.user-updated";
     private const string Exchange = "user";
     private const string RoutingKey = "user-updated";
 
-    public UserUpdatedConsumer()
+    public UserUpdatedConsumer(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
         // Configurando conexão com RabbitMQ
         var connectionFactory = new ConnectionFactory
         {
@@ -41,7 +47,11 @@ public class UserUpdatedConsumer : BackgroundService
             var contentArray = eventArgs.Body.ToArray();
             var json = Encoding.UTF8.GetString(contentArray);
 
-            // Converter o evento utilizando JsonConvert.Deserializeobject<T>
+            var @event = JsonConvert.DeserializeObject<UpdateUser>(json);
+
+            Console.WriteLine(json);
+
+            await UpdateUser(@event);
 
             _channel.BasicAck(eventArgs.DeliveryTag, false);
         };
@@ -50,4 +60,24 @@ public class UserUpdatedConsumer : BackgroundService
 
         return Task.CompletedTask;
     }
+    
+    private async Task UpdateUser(UpdateUser @event)
+    {
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var repository = scope.ServiceProvider.GetRequiredService<IUserNewsfeedRepository>();
+            
+            var user = await repository.GetByUserId(@event.Id);
+
+            user.User.DisplayName = @event.DisplayName;
+
+            await repository.Updated(user);
+        }
+    }
+}
+
+public class UpdateUser
+{
+    public Guid Id { get; set; }
+    public string DisplayName { get; set; }
 }

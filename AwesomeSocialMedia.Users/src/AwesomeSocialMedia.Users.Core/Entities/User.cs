@@ -41,6 +41,6 @@ public class User : AggregateRoot
         Location = location;
         Contact = contact;
         
-        AddEvent(new UserUpdated(displayName));
+        AddEvent(new UserUpdated(Id, displayName));
     }
 }
